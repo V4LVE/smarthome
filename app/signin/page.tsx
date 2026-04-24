@@ -17,7 +17,8 @@ export default function SignInPage() {
             password: data.password,
         }, {
             onSuccess(ctx) {
-                //      
+                alert(`Signed in successfully! Welcome`)     
+                console.log(ctx) 
             },
             onError(err) {
                 alert(`Sign in failed: ${err.error.message}`);
