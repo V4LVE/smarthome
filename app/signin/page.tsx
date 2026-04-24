@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { Button, Header, Card, Checkbox, Input, Label, FieldError, TextField, Description } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
+    const router = useRouter();
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -17,8 +20,7 @@ export default function SignInPage() {
             password: data.password,
         }, {
             onSuccess(ctx) {
-                alert(`Signed in successfully! Welcome`)     
-                console.log(ctx) 
+                router.push("/profile"); // redirect to profile page on successful sign in
             },
             onError(err) {
                 alert(`Sign in failed: ${err.error.message}`);
