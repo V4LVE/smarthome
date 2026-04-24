@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { Button } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { headers } from "next/headers";
+
 
 const navItems = [
   { href: "/", label: "Dashboard" },
@@ -8,6 +11,11 @@ const navItems = [
 ];
 
 export function Header() {
+    const session = authClient.getSession({
+        headers: headers()
+    })
+
+
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/65">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
