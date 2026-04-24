@@ -30,9 +30,11 @@ export function Header() {
           ))}
         </nav>
 
-        <Button className="rounded-full bg-zinc-900 px-4 py-2 font-medium text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900">
-          Sign in
-        </Button>
+        <Link href="/signin">
+          <Button className="rounded-full bg-zinc-900 px-4 py-2 font-medium text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900">
+            Sign in
+          </Button>
+        </Link>
       </div>
     </header>
   );
