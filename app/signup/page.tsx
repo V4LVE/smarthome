@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { authClient } from "@/lib/auth-client";
+import { alertManager } from "@/lib/alert-manager";
 
 type SignupStatus = {
   kind: "error" | "success";
@@ -63,12 +64,14 @@ export default function SignUpPage() {
               kind: "success",
               message: "Account created successfully. You can sign in now.",
             });
+            alertManager.showInfo("Signup successful", "Your account has been created. Please sign in.");
           },
           onError(error) {
             setStatus({
               kind: "error",
               message: error.error.message || "Signup failed. Please try again.",
             });
+            alertManager.showError("Signup failed", error.error.message || "Signup failed. Please try again.");
           },
         }
       );

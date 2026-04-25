@@ -44,7 +44,7 @@ export default function ProfilePage() {
 		);
 	}
 
-	const { name, email, image } = session.user;
+	const { name, email, image, role, createdAt } = session.user;
 	const initials = (name ?? "User")
 		.split(" ")
 		.map((part) => part[0])
@@ -99,6 +99,22 @@ export default function ProfilePage() {
 						</p>
 						<p className="mt-2 truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">
 							{email ?? "Not set"}
+						</p>
+					</div>
+					<div className="rounded-2xl border border-zinc-200/80 bg-white/80 p-4 dark:border-zinc-800 dark:bg-zinc-900/70">
+						<p className="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+							Role
+						</p>
+						<p className="mt-2 truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+							{role ?? "Not set"}
+						</p>
+					</div>
+					<div className="rounded-2xl border border-zinc-200/80 bg-white/80 p-4 dark:border-zinc-800 dark:bg-zinc-900/70">
+						<p className="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+							Member since
+						</p>
+						<p className="mt-2 truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+							{createdAt ? new Date(createdAt).toLocaleDateString() : "Not set"}
 						</p>
 					</div>
 				</div>
