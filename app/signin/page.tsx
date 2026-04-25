@@ -4,6 +4,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { Button, Header, Card, Checkbox, Input, Label, FieldError, TextField, Description } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { alertManager } from "@/lib/alert-manager";
 
 export default function SignInPage() {
     const router = useRouter();
@@ -23,7 +24,7 @@ export default function SignInPage() {
                 router.push("/profile"); // redirect to profile page on successful sign in
             },
             onError(err) {
-                alert(`Sign in failed: ${err.error.message}`);
+                alertManager.showError("Sign in failed", err.error.message);
             }
         })
     };
