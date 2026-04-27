@@ -4,7 +4,6 @@ import Link from "next/link";
 import { UserHeaderComponent } from "./userHeaderComponent";
 import { ThemeToggle } from "./themeToggle";
 import { authClient } from "@/lib/auth-client";
-import { role } from "better-auth/plugins";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", rolePermissions: ["user", "admin", ""] },
