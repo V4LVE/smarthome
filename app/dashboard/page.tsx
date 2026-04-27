@@ -3,14 +3,13 @@ import { desc } from "drizzle-orm";
 import db from "@/lib/dbClient";
 import { telemetryTable } from "@/schemas";
 import { DashboardHeader } from "./components/dashboardHeader";
-import { HumidityChartCard } from "./components/humidityChartCard";
 import { LatestTelemetryCards } from "./components/latestTelemetryCards";
-import { TemperatureChartCard } from "./components/temperatureChartCard";
+import { ChartsWrapper } from "./components/chartsWrapper";
 import type { TelemetryPoint } from "./components/types";
 
 export const dynamic = "force-dynamic";
 
-const SAMPLE_LIMIT = 72;
+const SAMPLE_LIMIT = 288;
 
 async function getTelemetryData(): Promise<{ data: TelemetryPoint[]; error: string | null }> {
 	try {
@@ -57,11 +56,8 @@ export default async function DashboardPage() {
 
 				<LatestTelemetryCards latest={latest} />
 
-				<section className="grid gap-4 xl:grid-cols-2">
-					<TemperatureChartCard data={data} />
-					<HumidityChartCard data={data} />
-				</section>
-			</div>
+			<ChartsWrapper initialData={data} />
 		</div>
+	</div>
 	);
 }

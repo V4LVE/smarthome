@@ -16,12 +16,8 @@ export function DashboardHeader({ sampleCount }: DashboardHeaderProps) {
             SmartHome Telemetry
           </p>
           <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl">
-            Live Climate Dashboard
+            Climate Dashboard
           </h1>
-          <p className="max-w-xl text-sm text-zinc-600 dark:text-zinc-300 sm:text-base">
-            Track temperature and humidity trends in real time with dedicated
-            charts and fast status insights.
-          </p>
         </div>
 
         <Chip
