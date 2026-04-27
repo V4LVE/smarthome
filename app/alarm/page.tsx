@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { alertManager } from "@/lib/alert-manager";
+import { toggleAlarm } from "@/services/alarmService";
 
 const DEFAULT_ALARM_PIN = "1234";
 
@@ -60,6 +61,7 @@ export default function AlarmPage() {
 		setIsSubmitting(true);
 		await new Promise((resolve) => setTimeout(resolve, 350));
 		setIsArmed((previous) => !previous);
+		await toggleAlarm(!isArmed);
 		setPinCode("");
 		setIsSubmitting(false);
 
