@@ -19,8 +19,10 @@ type HumidityChartCardProps = {
 
 export function HumidityChartCard({ data }: HumidityChartCardProps) {
   const [canRenderChart, setCanRenderChart] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
+    setIsDarkMode(document.documentElement.classList.contains("dark"));
     const animationFrame = requestAnimationFrame(() => {
       setCanRenderChart(true);
     });
@@ -69,14 +71,15 @@ export function HumidityChartCard({ data }: HumidityChartCardProps) {
               tickLine={false}
               axisLine={false}
               unit="%"
-              width={44}
+              width={50}
             />
             <Tooltip
               cursor={{ stroke: "#0891b2", strokeDasharray: "4 4" }}
               contentStyle={{
                 borderRadius: "12px",
-                border: "1px solid #e4e4e7",
-                backgroundColor: "rgba(255,255,255,0.95)",
+                border: isDarkMode ? "1px solid #27272a" : "1px solid #e4e4e7",
+                backgroundColor: isDarkMode ? "rgba(24, 24, 27, 0.95)" : "rgba(255,255,255,0.95)",
+                color: "#0891b2",
               }}
               labelFormatter={(label) =>
                 new Date(String(label)).toLocaleString([], {

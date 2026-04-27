@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@heroui/react";
 import {
+    Area,
+    AreaChart,
   CartesianGrid,
   Line,
   LineChart,
@@ -19,8 +21,10 @@ type TemperatureChartCardProps = {
 
 export function TemperatureChartCard({ data }: TemperatureChartCardProps) {
   const [canRenderChart, setCanRenderChart] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
+    setIsDarkMode(document.documentElement.classList.contains("dark"));
     const animationFrame = requestAnimationFrame(() => {
       setCanRenderChart(true);
     });
@@ -44,11 +48,11 @@ export function TemperatureChartCard({ data }: TemperatureChartCardProps) {
         <div className="h-full w-full min-w-0">
           {canRenderChart ? (
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={280}>
-          <LineChart data={data} margin={{ top: 12, right: 12, left: -16, bottom: 4 }}>
+          <AreaChart data={data} margin={{ top: 12, right: 12, left: -16, bottom: 4 }}>
             <defs>
-              <linearGradient id="tempStroke" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#fb7185" />
-                <stop offset="100%" stopColor="#f97316" />
+              <linearGradient id="tempFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#fb7185" stopOpacity={0.45} />
+                <stop offset="95%" stopColor="#fb7185" stopOpacity={0.05} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#a1a1aa33" />
@@ -75,8 +79,9 @@ export function TemperatureChartCard({ data }: TemperatureChartCardProps) {
               cursor={{ stroke: "#fb7185", strokeDasharray: "4 4" }}
               contentStyle={{
                 borderRadius: "12px",
-                border: "1px solid #e4e4e7",
-                backgroundColor: "rgba(255,255,255,0.95)",
+                border: isDarkMode ? "1px solid #27272a" : "1px solid #e4e4e7",
+                backgroundColor: isDarkMode ? "rgba(24, 24, 27, 0.95)" : "rgba(255,255,255,0.95)",
+                color: "#fb7185",
               }}
               labelFormatter={(label) =>
                 new Date(String(label)).toLocaleString([], {
@@ -94,15 +99,16 @@ export function TemperatureChartCard({ data }: TemperatureChartCardProps) {
                 return [displayValue, "Temperature"];
               }}
             />
-            <Line
-              type="monotone"
-              dataKey="temperature"
-              stroke="url(#tempStroke)"
-              strokeWidth={3}
-              dot={false}
-              activeDot={{ r: 5, strokeWidth: 0, fill: "#fb7185" }}
-            />
-          </LineChart>
+            <Area
+                          type="monotone"
+                          dataKey="temperature"
+                          stroke="#fb7185"
+                          fill="url(#tempFill)"
+                          strokeWidth={3}
+                          dot={false}
+                          activeDot={{ r: 5, strokeWidth: 0, fill: "#fb7185" }}
+                        />
+          </AreaChart>
             </ResponsiveContainer>
           ) : (
             <div className="h-full w-full rounded-xl bg-zinc-100/70 dark:bg-zinc-800/50" />
