@@ -28,9 +28,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -47,7 +48,7 @@ export default function RootLayout({
               })()
             `,
           }}
-        /> */}
+        />
       </head>
       <body className="min-h-full flex flex-col">
         <Header />

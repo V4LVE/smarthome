@@ -3,7 +3,7 @@ import { UserHeaderComponent } from "./userHeaderComponent";
 import { ThemeToggle } from "./themeToggle";
 
 const navItems = [
-  { href: "/", label: "Dashboard" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/alarm", label: "Alarm System" },
   { href: "/devices", label: "Devices" },
 ];
