@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { redirect } from "next/navigation";
 import { Button } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
@@ -14,6 +14,8 @@ export default function AlarmPage() {
 	const [isArmed, setIsArmed] = useState(false);
 	const [pinCode, setPinCode] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isUnauthorized, setIsUnauthorized] = useState(false);
+	const hasShownAlert = useRef(false);
 
 	const isAdmin = session?.user.role === "admin";
 	const currentPin = useMemo(
@@ -22,6 +24,24 @@ export default function AlarmPage() {
 	);
 	const primaryActionLabel = isArmed ? "Disarm alarm" : "Arm alarm";
 	const pinHasValidLength = pinCode.length >= 4;
+
+	useEffect(() => {
+		if (!isPending && !isAdmin && !hasShownAlert.current) {
+			const handleUnauthorized = async () => {
+				hasShownAlert.current = true;
+				await alertManager.showError(
+					"Access denied",
+					"You do not have permission to access the alarm control center.",
+				);
+				setIsUnauthorized(true);
+			};
+			handleUnauthorized();
+		}
+	}, [isAdmin, isPending]);
+
+	if (isUnauthorized) {
+		return redirect("/unauthorized");
+	}
 
 	if (isPending) {
 		return (
@@ -36,13 +56,11 @@ export default function AlarmPage() {
 		);
 	}
 
-	if (!isAdmin) {
-		return redirect("/unauthorized");
-	}
+
 
 	const handleToggleAlarm = async () => {
 		if (!pinHasValidLength) {
-			alertManager.showWarning(
+			await alertManager.showWarning(
 				"PIN required",
 				"Enter a valid PIN code before changing alarm state.",
 			);
@@ -50,7 +68,7 @@ export default function AlarmPage() {
 		}
 
 		if (pinCode !== currentPin) {
-			alertManager.showError(
+			await alertManager.showError(
 				"Invalid PIN",
 				"The entered PIN code is incorrect. Please try again.",
 			);
@@ -65,7 +83,7 @@ export default function AlarmPage() {
 		setPinCode("");
 		setIsSubmitting(false);
 
-		alertManager.showSuccess(
+		await alertManager.showSuccess(
 			isArmed ? "Alarm disarmed" : "Alarm armed",
 			isArmed
 				? "The security alarm is now disarmed."
