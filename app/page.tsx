@@ -1,7 +1,9 @@
 import { Button } from "@heroui/react";
 import Link from "next/link";
+import { connectMqtt } from "@/services/mqttService";
 
 export default function Home() {
+  connectMqtt();
   return (
     <div className="flex flex-col min-h-screen w-full bg-white dark:bg-black">
       {/* Hero Section */}
