@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { Button } from "@heroui/react";
 import { UserHeaderComponent } from "./userHeaderComponent";
 import { ThemeToggle } from "./themeToggle";
-
 
 const navItems = [
   { href: "/", label: "Dashboard" },
@@ -40,7 +38,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          
           <UserHeaderComponent />
         </div>
         <ThemeToggle />
