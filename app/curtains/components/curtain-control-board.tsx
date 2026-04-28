@@ -98,9 +98,6 @@ function CurtainCard({ curtain }: { curtain: CurtainDevice }) {
           <div className="flex items-center gap-4">
             <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${curtain.accent} shadow-lg shadow-sky-500/20`} />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500 dark:text-zinc-400">
-                {curtain.room}
-              </p>
               <h3 className="mt-1 text-xl font-semibold text-zinc-950 dark:text-white">
                 {curtain.label}
               </h3>
@@ -115,6 +112,38 @@ function CurtainCard({ curtain }: { curtain: CurtainDevice }) {
 
       <CardContent className="space-y-5 p-6">
         <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">{curtain.description}</p>
+
+        {(curtain.latestMeasuredTemperature !== undefined ||
+          curtain.latestMeasuredHumidity !== undefined) && (
+          <div className="grid grid-cols-2 gap-3 rounded-xl border border-zinc-200/50 bg-gradient-to-br from-zinc-50/50 via-white/30 to-zinc-50/50 p-4 dark:border-zinc-800/50 dark:from-zinc-900/30 dark:via-zinc-950/20 dark:to-zinc-900/30">
+            {curtain.latestMeasuredTemperature !== undefined && (
+              <div className="flex flex-col gap-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  Temperature
+                </p>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-2xl font-bold text-zinc-900 dark:text-white">
+                    {curtain.latestMeasuredTemperature}
+                  </span>
+                  <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">°C</span>
+                </div>
+              </div>
+            )}
+            {curtain.latestMeasuredHumidity !== undefined && (
+              <div className="flex flex-col gap-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  Humidity
+                </p>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-2xl font-bold text-zinc-900 dark:text-white">
+                    {curtain.latestMeasuredHumidity}
+                  </span>
+                  <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">%</span>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         <form action={formAction} className="space-y-4">
           <input type="hidden" name="curtainId" value={curtain.id} />
