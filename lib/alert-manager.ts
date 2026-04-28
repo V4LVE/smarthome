@@ -52,19 +52,19 @@ export const alertManager = {
     };
   },
 
-  showError(title: string, message: string, duration?: number) {
+  async showError(title: string, message: string, duration?: number) {
     emit({ title, message, status: "danger", duration });
   },
 
-  showWarning(title: string, message: string, duration?: number) {
+  async showWarning(title: string, message: string, duration?: number) {
     emit({ title, message, status: "warning", duration });
   },
 
-  showSuccess(title: string, message: string, duration?: number) {
+  async showSuccess(title: string, message: string, duration?: number) {
     emit({ title, message, status: "success", duration });
   },
 
-  showInfo(title: string, message: string, duration?: number) {
+  async showInfo(title: string, message: string, duration?: number) {
     emit({ title, message, status: "accent", duration });
   },
 };

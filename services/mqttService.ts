@@ -1,14 +1,15 @@
 import mqtt, { MqttClient } from 'mqtt';
 
-const host = 'mqtts://76e4729ceca24baa99d60e1c616cb650.s1.eu.hivemq.cloud';
+const host = '76e4729ceca24baa99d60e1c616cb650.s1.eu.hivemq.cloud';
+const brokerUrl = `wss://${host}:8884/mqtt`;
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
 const options = {
     keepalive: 30,
     clientId,
+    protocol: 'wss' as const,
     protocolId: 'MQTT' as const,
     protocolVersion: 4 as const,
-    port: 8883,
     clean: true,
     reconnectPeriod: 1000,
     connectTimeout: 30 * 1000,
@@ -44,7 +45,7 @@ export function connectMqtt(): MqttClient {
     }
 
     console.log('connecting mqtt client');
-    client = mqtt.connect(host, options);
+    client = mqtt.connect(brokerUrl, options);
 
     client.on('error', (err) => {
         console.log(err);
