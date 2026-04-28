@@ -8,12 +8,11 @@ import { authClient } from "@/lib/auth-client";
 const navItems = [
   { href: "/dashboard", label: "Dashboard", rolePermissions: ["user", "admin", ""] },
   { href: "/alarm", label: "Alarm System", rolePermissions: ["admin"] },
-  { href: "/devices", label: "Devices", rolePermissions: ["user", "admin"] },
+  { href: "/curtain", label: "Curtains", rolePermissions: ["user", "admin"] },
 ];
 
 export function Header() {
   const { data: session, isPending } = authClient.useSession();
-  const isAdmin = session?.user.role === "admin";
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/50 bg-gradient-to-b from-white to-white/95 backdrop-blur-xl shadow-sm dark:border-zinc-800/50 dark:from-zinc-950/95 dark:to-zinc-950/80">
