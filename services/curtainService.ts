@@ -1,7 +1,7 @@
 import { getClient } from "./mqttService";
 import { ensureConnection } from "./mqttService";
 
-const curtainBaseTopic = 'curtains';
+const curtainBaseTopic = 'curtain';
 
 export async function toggleCurtain(curtainId: string, shouldOpen: boolean): Promise<void> {
     ensureConnection();

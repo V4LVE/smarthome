@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client";
 const navItems = [
   { href: "/dashboard", label: "Dashboard", rolePermissions: ["user", "admin", ""] },
   { href: "/alarm", label: "Alarm System", rolePermissions: ["admin"] },
-  { href: "/curtain", label: "Curtains", rolePermissions: ["user", "admin"] },
+  { href: "/curtains", label: "Curtains", rolePermissions: ["user", "admin"] },
 ];
 
 export function Header() {
