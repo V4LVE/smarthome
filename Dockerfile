@@ -23,6 +23,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+ENV BETTER_AUTH_SECRET="bewuTDVqPdcCgAFKH3JSBXw9dASCV5ZH"
+ENV BETTER_AUTH_URL=http://localhost:3000
+ENV DATABASE_URL="postgres://postgres:Pwrvol901@10.131.20.59:5432/postgres"
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
