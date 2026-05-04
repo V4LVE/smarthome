@@ -13,6 +13,11 @@ FROM base AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
+
+ENV BETTER_AUTH_SECRET="bewuTDVqPdcCgAFKH3JSBXw9dASCV5ZH"
+ENV BETTER_AUTH_URL=http://localhost:3000
+ENV DATABASE_URL="postgres://postgres:Pwrvol901@10.131.20.59:5432/postgres"
+
 COPY . .
 
 RUN npm run build
