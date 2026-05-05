@@ -1,13 +1,13 @@
 import mqtt, { MqttClient } from 'mqtt';
 
 const host = '10.131.20.59';
-const brokerUrl = `wss://${host}:8083/mqtt`;
+const brokerUrl = `ws://${host}:8083/mqtt`;
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
 const options = {
     keepalive: 30,
     clientId,
-    protocol: 'wss' as const,
+    protocol: 'ws' as const,
     protocolId: 'MQTT' as const,
     protocolVersion: 4 as const,
     clean: true,
