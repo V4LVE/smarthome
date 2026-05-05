@@ -1,7 +1,7 @@
 import mqtt, { MqttClient } from 'mqtt';
 
-const host = '76e4729ceca24baa99d60e1c616cb650.s1.eu.hivemq.cloud';
-const brokerUrl = `wss://${host}:8884/mqtt`;
+const host = '10.131.20.59';
+const brokerUrl = `wss://${host}:8083/mqtt`;
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
 const options = {
@@ -13,8 +13,8 @@ const options = {
     clean: true,
     reconnectPeriod: 1000,
     connectTimeout: 30 * 1000,
-    username: 'BunClient',
-    password: 'Pwrvol901!',
+    username: 'pi',
+    password: 'Pwrvol901',
     will: {
         topic: 'WillMsg',
         payload: 'Connection Closed abnormally..!',
