@@ -16,6 +16,6 @@ export const auth = betterAuth({
         admin() 
     ],
     
-    trustedOrigins: ["http://localhost:3001"], // Add your trusted origins here
+    trustedOrigins: process.env.TRUSTED_ORIGINS?.split(",") || ["http://localhost:3001", "http://localhost:3000", "http://127.0.0.1:3000", "http://10.131.20.59:3000"],
 
 });
