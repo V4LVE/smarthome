@@ -1,6 +1,7 @@
 import { Alert, AlertTitle } from "@heroui/react";
 import { AdminDashboardHero } from "./components/admin-dashboard-hero";
 import { AdminMetricsGrid } from "./components/admin-metrics-grid";
+import ZigbeeDevicesComponent from "./components/zigbeeDevicesComponent";
 import { AdminUsersTable } from "./components/admin-users-table";
 import { getAdminDashboardData } from "./data";
 
@@ -28,6 +29,8 @@ export default async function AdminDashboardPage() {
 					verifiedCount={dashboard.verifiedCount}
 				/>
 
+				
+
 				{dashboard.error ? (
 					<Alert status="danger">
 						<AlertTitle>{dashboard.error}</AlertTitle>
@@ -35,6 +38,8 @@ export default async function AdminDashboardPage() {
 				) : null}
 
 				<AdminUsersTable users={dashboard.users} />
+
+				<ZigbeeDevicesComponent />
 			</div>
 		</div>
 	);
