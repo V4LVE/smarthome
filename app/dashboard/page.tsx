@@ -6,6 +6,7 @@ import { DashboardHeader } from "./components/dashboardHeader";
 import { LatestTelemetryCards } from "./components/latestTelemetryCards";
 import { ChartsWrapper } from "./components/chartsWrapper";
 import type { TelemetryPoint } from "./components/types";
+import TempSensorComponent from "./components/tempSensorComponent";
 
 export const dynamic = "force-dynamic";
 
@@ -56,8 +57,10 @@ export default async function DashboardPage() {
 
 				<LatestTelemetryCards latest={latest} />
 
-			<ChartsWrapper initialData={data} />
+				<ChartsWrapper initialData={data} />
+
+				<TempSensorComponent />
+			</div>
 		</div>
-	</div>
 	);
 }
