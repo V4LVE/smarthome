@@ -60,25 +60,6 @@ export function connectMqtt(): MqttClient {
         isConnected = true;
     });
 
-    // client.on('message', async (topic, message, packet) => {
-    //     try {
-    //         // Only store intended topic
-    //         if (topic !== 'telemetry') return;
-
-    //         // Optional: skip duplicated re-delivery
-    //         if (packet.dup) return;
-
-    //         const telemetry: TelemetryModel = JSON.parse(message.toString());
-
-    //         console.log(`[${topic}] Temperature: ${telemetry.temperature}°C`);
-    //         console.log(`[${topic}] Humidity: ${telemetry.humidity}%`);
-
-    //         await db.insert(telemetryTable).values(telemetry).execute();
-    //     } catch (err) {
-    //         console.error('Failed to parse message:', err);
-    //     }
-    // });
-
     client.on('close', () => {
         console.log(clientId + ' disconnected');
         client = null;

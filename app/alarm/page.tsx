@@ -6,6 +6,7 @@ import { Button } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { alertManager } from "@/lib/alert-manager";
 import { toggleAlarm } from "@/services/alarmService";
+import AlarmDoorSensorComponent from "./components/alarmDoorSensorComponent";
 
 const DEFAULT_ALARM_PIN = "1234";
 
@@ -176,7 +177,12 @@ export default function AlarmPage() {
 						{isSubmitting ? "Applying..." : primaryActionLabel}
 					</Button>
 				</div>
+
+				<div className="mt-8">
+					<AlarmDoorSensorComponent />
+				</div>
 			</div>
 		</section>
+		
 	);
 }
